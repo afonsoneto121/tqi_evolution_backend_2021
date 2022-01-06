@@ -5,6 +5,7 @@ import com.dio.tqi.tqi_evolution_backend_2021.exception.UserAlreadyExists;
 import com.dio.tqi.tqi_evolution_backend_2021.model.UserModel;
 import com.dio.tqi.tqi_evolution_backend_2021.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -13,9 +14,11 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
+    private final PasswordEncoder encoder;
 
     public UserModel save(UserModel userModel) throws UserAlreadyExists {
         this.userAlreadyExist(userModel.getEmail());
+        userModel.setPassword(encoder.encode(userModel.getPassword()));
         return userRepository.save(userModel);
     }
     private void userAlreadyExist(String email) throws UserAlreadyExists {
