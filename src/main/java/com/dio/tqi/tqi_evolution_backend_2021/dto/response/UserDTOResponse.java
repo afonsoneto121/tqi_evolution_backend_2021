@@ -10,6 +10,7 @@ import javax.validation.constraints.NotBlank;
 @Data
 @Builder
 public class UserDTOResponse {
+    private String id;
     private String name;
     private String email;
     private String cpf;

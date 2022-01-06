@@ -7,6 +7,8 @@ import com.dio.tqi.tqi_evolution_backend_2021.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class UserService {
@@ -17,14 +19,18 @@ public class UserService {
         return userRepository.save(userModel);
     }
     private void userAlreadyExist(String email) throws UserAlreadyExists {
-        userRepository.findByEmail(email)
-                .orElseThrow(() -> new UserAlreadyExists("User Already Exists"));
+        Optional<UserModel> optional = userRepository.findByEmail(email);
+        if(optional.isPresent()){
+            throw new UserAlreadyExists("User Already Exists");
+        }
     }
     public UserModel update(String id, UserModel userModel) throws NotFound, UserAlreadyExists {
-        this.userAlreadyExist(userModel.getEmail());
-        this.findById(id);
-        userRepository.save(userModel);
-        return null;
+        UserModel byId = this.findById(id);
+        if (!byId.getEmail().equals(userModel.getEmail())) {
+            this.userAlreadyExist(userModel.getEmail());
+        }
+        userModel.setId(byId.getId());
+        return userRepository.save(userModel);
     }
     public void delete(String id) {
         userRepository.deleteById(id);

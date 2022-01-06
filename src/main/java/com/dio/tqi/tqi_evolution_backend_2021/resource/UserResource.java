@@ -29,20 +29,20 @@ public class UserResource {
         return ResponseEntity.status(HttpStatus.CREATED).body(userDTOResponse);
     }
     @PutMapping("/{id}")
-    public ResponseEntity<UserDTOResponse> update(@RequestParam String id,
+    public ResponseEntity<UserDTOResponse> update(@PathVariable String id,
                                  @RequestBody @Valid UserDTORequest userDTORequest) throws UserAlreadyExists, NotFound {
         UserModel userModel = mapper.dtoRequestToModel(userDTORequest);
         UserModel update = service.update(id, userModel);
         UserDTOResponse userDTOResponse = mapper.modelToDtoResponse(update);
-        return ResponseEntity.status(HttpStatus.CREATED).body(userDTOResponse);
+        return ResponseEntity.status(HttpStatus.OK).body(userDTOResponse);
     }
     @DeleteMapping("/{id}")
-    public ResponseEntity delete(@RequestParam String id){
+    public ResponseEntity delete(@PathVariable String id){
         service.delete(id);
         return ResponseEntity.noContent().build();
     }
     @GetMapping("/{id}")
-    public ResponseEntity<UserDTOResponse> findById(@RequestParam String id) throws NotFound {
+    public ResponseEntity<UserDTOResponse> findById(@PathVariable String id) throws NotFound {
         UserModel byId = service.findById(id);
         UserDTOResponse userDTOResponse = mapper.modelToDtoResponse(byId);
         return ResponseEntity.ok(userDTOResponse);
