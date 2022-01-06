@@ -1,6 +1,7 @@
 package com.dio.tqi.tqi_evolution_backend_2021.resource.advice;
 
 import com.dio.tqi.tqi_evolution_backend_2021.dto.Message;
+import com.dio.tqi.tqi_evolution_backend_2021.exception.NotAuthorizedException;
 import com.dio.tqi.tqi_evolution_backend_2021.exception.NotFound;
 import com.dio.tqi.tqi_evolution_backend_2021.exception.UserAlreadyExists;
 import org.springframework.http.HttpStatus;
@@ -21,6 +22,13 @@ public class UserResourceAdvice {
     public ResponseEntity<Message> userAlreadyExists() {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
                 Message.builder().message("Email Already Exists").build()
+        );
+    }
+
+    @ExceptionHandler(NotAuthorizedException.class)
+    public ResponseEntity<Message> notAuthorized() {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(
+                Message.builder().message("User not has permission").build()
         );
     }
 }

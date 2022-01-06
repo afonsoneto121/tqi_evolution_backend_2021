@@ -2,6 +2,7 @@ package com.dio.tqi.tqi_evolution_backend_2021.resource;
 
 import com.dio.tqi.tqi_evolution_backend_2021.dto.request.UserDTORequest;
 import com.dio.tqi.tqi_evolution_backend_2021.dto.response.UserDTOResponse;
+import com.dio.tqi.tqi_evolution_backend_2021.exception.NotAuthorizedException;
 import com.dio.tqi.tqi_evolution_backend_2021.exception.NotFound;
 import com.dio.tqi.tqi_evolution_backend_2021.exception.UserAlreadyExists;
 import com.dio.tqi.tqi_evolution_backend_2021.mapper.UserMapper;
@@ -12,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @RestController
@@ -30,20 +32,23 @@ public class UserResource {
     }
     @PutMapping("/{id}")
     public ResponseEntity<UserDTOResponse> update(@PathVariable String id,
-                                 @RequestBody @Valid UserDTORequest userDTORequest) throws UserAlreadyExists, NotFound {
+                                                  @RequestBody @Valid UserDTORequest userDTORequest,
+                                                  HttpServletRequest request) throws UserAlreadyExists, NotFound, NotAuthorizedException {
         UserModel userModel = mapper.dtoRequestToModel(userDTORequest);
-        UserModel update = service.update(id, userModel);
+        UserModel update = service.update(id, userModel, request);
         UserDTOResponse userDTOResponse = mapper.modelToDtoResponse(update);
         return ResponseEntity.status(HttpStatus.OK).body(userDTOResponse);
     }
     @DeleteMapping("/{id}")
-    public ResponseEntity delete(@PathVariable String id){
-        service.delete(id);
+    public ResponseEntity delete(@PathVariable String id,
+                                 HttpServletRequest request) throws NotAuthorizedException {
+        service.delete(id, request);
         return ResponseEntity.noContent().build();
     }
     @GetMapping("/{id}")
-    public ResponseEntity<UserDTOResponse> findById(@PathVariable String id) throws NotFound {
-        UserModel byId = service.findById(id);
+    public ResponseEntity<UserDTOResponse> findById(@PathVariable String id,
+                                                    HttpServletRequest request) throws NotFound, NotAuthorizedException {
+        UserModel byId = service.findById(id, request);
         UserDTOResponse userDTOResponse = mapper.modelToDtoResponse(byId);
         return ResponseEntity.ok(userDTOResponse);
     }
