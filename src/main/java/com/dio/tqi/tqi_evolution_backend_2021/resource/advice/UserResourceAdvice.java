@@ -28,7 +28,7 @@ public class UserResourceAdvice {
     @ExceptionHandler(NotAuthorizedException.class)
     public ResponseEntity<Message> notAuthorized() {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(
-                Message.builder().message("User not has permission").build()
+                Message.builder().message("User doesn\'t have permission").build()
         );
     }
 }

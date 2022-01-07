@@ -5,12 +5,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.id.UUIDGenerator;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Builder
@@ -36,4 +33,9 @@ public class UserModel {
     private String address;
     @Column(nullable = false)
     private Float income;
+
+    @OneToMany( fetch = FetchType.LAZY,
+                mappedBy = "user",
+                cascade = CascadeType.ALL)
+    private List<LoanModel> loan;
 }
