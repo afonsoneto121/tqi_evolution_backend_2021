@@ -10,10 +10,12 @@ spring:
     password: admin
   # JPA
   jpa:
+    show-sql: true
     hibernate:
       ddl-auto: update
     properties:
       hibernate:
+        format_sql: true
         dialect: org.hibernate.dialect.PostgreSQLDialect
         use_sql_comments: true
         jdbc:

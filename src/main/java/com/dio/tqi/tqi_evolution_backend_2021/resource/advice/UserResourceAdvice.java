@@ -14,7 +14,7 @@ public class UserResourceAdvice {
     @ExceptionHandler(NotFound.class)
     public ResponseEntity<Message> notFound() {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
-          Message.builder().message("User Not Found").build()
+          Message.builder().message("Resource not found").build()
         );
     }
 

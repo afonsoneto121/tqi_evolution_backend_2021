@@ -7,6 +7,8 @@ import com.dio.tqi.tqi_evolution_backend_2021.model.UserModel;
 import com.dio.tqi.tqi_evolution_backend_2021.repository.UserRepository;
 import com.dio.tqi.tqi_evolution_backend_2021.util.SecurityUtil;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -39,10 +41,13 @@ public class UserService {
         userModel.setId(byId.getId());
         return userRepository.save(userModel);
     }
+
     public void delete(String id, HttpServletRequest request) throws NotAuthorizedException {
         securityUtil.authorizedUser(request,id);
         userRepository.deleteById(id);
     }
+
+
     public UserModel findById(String id, HttpServletRequest request) throws NotFound, NotAuthorizedException {
         securityUtil.authorizedUser(request,id);
         return userRepository.findById(id)
