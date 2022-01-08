@@ -11,7 +11,8 @@ public class LoanValidator implements ConstraintValidator<LoanValid, LoanDTORequ
     public boolean isValid(LoanDTORequest value, ConstraintValidatorContext context) {
 //        LocalDate dateFirstInstallment = value.getDateFirstInstallment().plusMonths(3);
 //        return dateFirstInstallment.isBefore(LocalDate.now());
-        return value.getDateFirstInstallment()
+        return value == null ? false:
+                value.getDateFirstInstallment()
                 .minusMonths(3)
                 .isBefore(LocalDate.now());
     }

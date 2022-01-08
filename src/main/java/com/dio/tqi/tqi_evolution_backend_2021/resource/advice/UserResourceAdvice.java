@@ -31,4 +31,10 @@ public class UserResourceAdvice {
                 Message.builder().message("User doesn\'t have permission").build()
         );
     }
+    @ExceptionHandler(javax.validation.ValidationException.class)
+    public ResponseEntity<Message> invalidAttr() {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+                Message.builder().message("Invalid Params").build()
+        );
+    }
 }
