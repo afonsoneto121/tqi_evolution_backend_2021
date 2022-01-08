@@ -4,6 +4,10 @@
 
 ## Sobre o Projeto
 
+Por se tratar de uma aplicação bancária, o foco principal será na segurança dos dados. A autenticação é baseada em token JWT que por padrão se expira a cada 20 minutos e há apenas dois endpoints abertos para requisições: login e salvar novo usuário. O acesso aos dados é limita, isso significa que o usuária autenticado só consegue acessar suas próprias informções, qualquer requisição feita em um dado pertencente a outro usuário será respondida com status unauthorized. Para mais detalhes, consultar a documentação.
+
+### Especificações 
+
 Uma empresa de empréstimo precisa criar um sistema de análise de crédito para fornecer aos seus clientes as seguintes funcionalidades:
 i. Cadastro de clientes
     O cliente pode cadastrar: nome, e-mail, CPF, RG, endereço completo, renda e senha.
@@ -16,6 +20,8 @@ iv. Acompanhamento das solicitações de empréstimo
     O cliente pode visualizar a lista de empréstimos solicitados por ele mesmo e também os detalhes de um de seus empréstimos.
     Na listagem, devemos retornar no mínimo o código do empréstimo, o valor e a quantidade de parcelas.
     No detalhe do empréstimo, devemos retornar: código do empréstimo, valor, quantidade de parcelas, data da primeira parcela, e-mail do cliente e renda do cliente.
+
+
 
 ## Tecnologias Utilizadas
 
@@ -75,6 +81,15 @@ java -jar tqi_evolution_backend_2021-0.0.1-SNAPSHOT.jar
 
 A aplicação deverá iniciar no terminal 
 
-### Via Docker 
+### Via Docker (Linux e Windows)
 
-...
+Neste caso não é necessário ter o Java instalado localmente.
+
+Na raiz do projeto, inicie a aplicação
+
+```sh
+cd build-docker && \
+docker-compose up --build -d
+```
+
+A aplicação irá iniciar em background, a menos que a flag -d seja omitida.
