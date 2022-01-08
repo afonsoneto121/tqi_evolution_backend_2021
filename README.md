@@ -4,7 +4,7 @@
 
 ## Sobre o Projeto
 
-Por se tratar de uma aplicação bancária, o foco principal será na segurança dos dados. A autenticação é baseada em token JWT que por padrão se expira a cada 20 minutos e há apenas dois endpoints abertos para requisições: login e salvar novo usuário. O acesso aos dados é limita, isso significa que o usuária autenticado só consegue acessar suas próprias informções, qualquer requisição feita em um dado pertencente a outro usuário será respondida com status unauthorized. Para mais detalhes, consultar a documentação.
+Por se tratar de uma aplicação bancária, o foco principal será na segurança dos dados. A autenticação é baseada em token JWT que por padrão se expira a cada 20 minutos e há apenas dois endpoints abertos para requisições: login e salvar novo usuário. O acesso aos dados é limita, isso significa que o usuária autenticado só consegue acessar suas próprias informações, qualquer requisição feita em um dado pertencente a outro usuário será respondida com status unauthorized. Para mais detalhes, consultar a documentação.
 
 ### Especificações 
 
