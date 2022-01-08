@@ -39,6 +39,7 @@ public class UserService {
             this.userAlreadyExist(userModel.getEmail());
         }
         userModel.setId(byId.getId());
+        userModel.setPassword(encoder.encode(userModel.getPassword()));
         return userRepository.save(userModel);
     }
 
