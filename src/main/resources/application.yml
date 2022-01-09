@@ -1,7 +1,6 @@
 jwt:
   secret: ${JWT_SECRET:43w11jzJHUOspQya0%2fd1Qg%3d%3d5by4Big0bkeRbAm54MN2ZA%3d%3d}
-  #expiration: ${JWT_EXPIRATION:1200000}
-  expiration: 582222222351684
+  expiration: ${JWT_EXPIRATION:1200000}
 spring:
   datasource:
     url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/bank}
@@ -21,5 +20,3 @@ spring:
         jdbc:
           lob:
             non_contextual_creation: true
-security.basic.enabled: false
-management.security.enabled: false
