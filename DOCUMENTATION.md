@@ -92,7 +92,7 @@ AUTHORIZATION Bearer token
   * Em caso de requisições com erros de escrita,
   * Caso novo email já esteja sendo usado por outro usuário
 * 401 Unauthorized 
-  * Caso o id passado na URL seja diferente do usuário válidado para o token atual
+  * Caso o id passado na URL seja diferente do usuário válido para o token atual
 
 ## Detetar usuário
 
@@ -110,7 +110,7 @@ AUTHORIZATION Bearer token
 
 * 204 NO CONTENT
 * 401 Unauthorized 
-  * Caso o id passado na URL seja diferente do usuário válidado para o token atual
+  * Caso o id passado na URL seja diferente do usuário válido para o token atual
 
 ## Buscar usuário pelo Id
 
@@ -128,7 +128,7 @@ AUTHORIZATION Bearer token
 
 * 200 OK
 * 401 Unauthorized 
-  * Caso o id passado na URL seja diferente do usuário válidado para o token atual
+  * Caso o id passado na URL seja diferente do usuário válido para o token atual
 * 404 NOT FOUND
   * Caso usuário não for encontrado
 
@@ -159,6 +159,50 @@ AUTHORIZATION Bearer token
 * 201 CREATED
 * 400 Bad Request
   * Em caso de requisições com erros de escrita,
-  * Caso a data 
+  * Caso a data seja inválida ou o número de parcelas seja mair que 60
 * 401 Unauthorized 
-  * Caso o id passado na URL seja diferente do usuário válidado para o token atual
+  * Caso o id passado na URL seja diferente do usuário válido para o token atual
+
+## Todos os empréstimos de um usuário
+
+```:arrow_right:
+GET /api/v1/loans/{idUser}/loans?page=0&size=5&sort=value,asc
+```
+
+**Parâmetros**
+
+* page :arrow_right: pagina 
+* size :arrow_right: tamanho da página
+* sort :arrow_right: ordenação. Ex: nome_do_atributo,desc ou nome_do_atributo,asc
+
+**Header**
+
+```
+AUTHORIZATION Bearer token
+```
+
+**Response**
+
+* 200 OK
+* 401 Unauthorized 
+  * Caso o id passado na URL seja diferente do usuário válido para o token atual
+
+## Detalhes de um empréstimo 
+
+```
+GET /api/v1/loans/details/{IdEmprestimo}
+```
+
+**Header**
+
+```
+AUTHORIZATION Bearer token
+```
+
+**Response**
+
+* 200 OK
+* 401 Unauthorized 
+  * Caso o usuário dono do empréstimo não seja o usuário válido para o token atual
+* 404 NOT FOUND
+  * Caso o empréstimo não seja encontrado
