@@ -47,7 +47,7 @@ Documentação da API está disponível [aqui](https://github.com/afonsoneto121/
 git clone https://github.com/afonsoneto121/-tqi_evolution_backend_2021.git
 ```
 
-Há duas formas de iniciar o projeto (i) via gradle e (iI) via docker
+Há duas formas de iniciar o projeto (i) via gradle e (ii) via docker
 
 ### Via Gradle (Linux)
 
@@ -62,13 +62,13 @@ cd ..
 Compilar a aplicação
 
 ```sh
-./gradlew build
+./gradlew build --scan
 ```
 
 ou 
 
 ```sh
-./gradlew build -x test
+./gradlew build --scan -x test
 ```
 
 Para pular a execução dos testes(mais rápido).
